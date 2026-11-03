@@ -212,7 +212,7 @@ $\hat{y}(\mathbf{x}) = \sum_{a \in \mathcal{H}(\mathbf{x})} w_a(\mathbf{x})\, f_
 </div>
 
 
-# An experiment in soils... {background-color="#000000"}
+# An experiment in soils with mid IR data... {background-color="#000000"}
 
 ## Experiment [1/2]...
 
@@ -257,7 +257,7 @@ __Target__ $y$: Total carbon
 <img src="fig/val_plot.png" width="30%" alt="liblex" style="display:block; margin:0 auto;">
 
 
-# Other tests in in soils... {background-color="#000000"}
+# Other tests in in soils with NIR data... {background-color="#000000"}
 
 ## Two kaggle competitions
 
@@ -271,7 +271,7 @@ __Target__ $y$: Total carbon
 </div>
 </div>
 
-# In a food and feed applications... {background-color="#000000"}
+# In a food and feed NIR applications... {background-color="#000000"}
 
 ## Feed
 
