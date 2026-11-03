@@ -1,0 +1,7 @@
+project:
+  type: website
+render:
+  - why-refit-when-you-can-retrieve.qmd
+
+website:
+  title: "IDRC 2026"

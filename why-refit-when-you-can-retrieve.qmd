@@ -1,0 +1,406 @@
+---
+title: "<span style='font-size: 1.7em;'>Why refit when you can retrieve?</span>"
+subtitle: "<span style='font-size: 0.8em;'>Introducing <span style='font-style:italic;'>liblex</span>, an algorithmic framework for local model retrieval in infrared spectroscopy<br><br>Nirpy Webminars</span>"
+
+author:
+  - name: "<span style='color:#64b445;'>Leonardo Ramirez-Lopez</span>"
+
+date: "2026-November-03"
+bibliography: reference-list.bib
+csl: elsevier-harvard.csl
+link-citations: true
+format: 
+  revealjs:
+    center: true
+    embed-resources: true
+    code-block-font-size: "0.05em"
+    slideNumber: false
+    #logo: fig/buchi-logo_green2.png
+    css: fig/cac-presentation.css
+    theme: white
+    transition: slide
+    controls: true
+    progress: true
+    history: true
+    hash: true
+    title-slide-attributes:
+      data-background-image: fig/polar_spectra_bg.png
+      data-background-size: cover
+      data-background-position: center
+      data-background-color: "#000000"
+execute:
+  enabled: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+required_packages <- c("resemble")
+
+missing <- required_packages[!sapply(required_packages, requireNamespace, quietly = TRUE)]
+if (length(missing) > 0) install.packages(missing)
+
+library(resemble)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = FALSE,
+  message = FALSE,
+  warning = FALSE, 
+  fig.align = 'center'
+)
+```
+
+
+
+## Localised modelling: why? {background-color="#000000"}
+
+::: {.incremental}
+
+- Global linear models assume a single spectrum–response relationship: heterogeneous libraries may violate this.
+
+- Local modelling (_a.k.a_ memory-based learning) restricts fitting to spectrally similar samples, reducing the impact of domain shift [@shenk1997investigation; @naes1990locally]
+
+:::
+
+:::{.notes}
+
+- I WANTED TO MAKE A PRESENTATION TO IMPRESS (AS THE OTHER PRESNTERS MAY HAVE ALSO WANTED)
+
+- BUT THE IDEAS BEHIND THIS ARE SO SIMPLE THAT MAKING AN IMPRESSIVE SET OF SLIDES IS NOT EASY... THEREFORE I TRIED MY BEST TO FOCUS ON ELEGANCE (NO AESTETHIC [HOW SHOULD I PUT IT? HELP ME AS ELEGANCE MAY BE UNDERSTOOD AS AESTETHIC ELEGANCE]) AND CLARITY, AND I HOPE YOU WILL ENJOY IT.
+
+- soil is BOORING, too challenging
+
+- SAMPLING for selecting the anchors!
+
+- models that make sense
+
+- filter out models!
+
+- low uncertainty but may be due to the fact that all experts are worng
+
+- ambiguity in the experts
+
+:::  
+
+## {background-color="#000000"}
+
+> *All models are wrong, but some are useful* -- [@box1976science]
+
+## Localised modelling 
+
+<div style="display:flex; align-items:center; justify-content:center; height:100%;">
+  <img src="fig/MBL.gif" style="max-height:400px;" alt="mbl">
+</div>  
+
+## Localised modelling: Trade-offs... {background-color="#000000"}
+
+::: {.incremental}
+
+- Per-query refitting → computational cost at prediction time  
+
+- Full-library access required at prediction → data-sharing constraints  
+
+- No general-purpose interpretation across query-specific models  
+
+- Sensitivity to neighbour selection and spectral inconsistencies  
+
+:::
+
+# Why refit when you can retrieve? {background-color="#000000"}
+_Our proposal ..._
+
+
+## 
+
+<img src="fig/liblex-cac-tarragona/1.png" width="30%" alt="liblex"> 
+
+::: {.small-text}
+$$\mathcal{D}_r := \{(\mathbf{x}_r^j, y_r^j)\}_{j=1}^n$$
+::: 
+
+## 
+
+<img src="fig/liblex-cac-tarragona/2.png" width="30%" alt="liblex">
+
+::: {.small-text}
+$$\mathcal{A} \subseteq \{1, \dots, n\}$$
+::: 
+
+## 
+
+<img src="fig/liblex-cac-tarragona/3.png" width="30%" alt="liblex">
+
+::: {.small-text}
+$$\mathcal{N}_k(a) = \{a\} \cup \mathrm{NN}_{k-1}(a), \quad |\mathcal{N}_k(a)| = k$$
+::: 
+
+
+## 
+
+<img src="fig/liblex-cac-tarragona/4.png" width="30%" alt="liblex">
+
+::: {.small-text}
+$$f_a: \mathbb{R}^d \to \mathbb{R}, \quad \mathbf{c}_a = \frac{1}{k}\sum_{j \in \mathcal{N}_k(a)} \mathbf{x}_r^j$$
+:::
+
+
+
+## 
+
+<img src="fig/liblex-cac-tarragona/5.png" width="30%" alt="liblex">
+
+::: {.small-text}
+$$\mathcal{L} := \{(f_a, \mathbf{c}_a)\}_{a \in \mathcal{A}}$$
+::: 
+
+## 
+
+<img src="fig/liblex-cac-tarragona/6.png" width="30%" alt="liblex">
+
+
+## 
+
+<img src="fig/liblex-cac-tarragona/7.png" width="30%" alt="liblex">
+
+::: {.small-text}
+$\hat{y}(\mathbf{x}) = \sum_{a \in \mathcal{H}(\mathbf{x})} w_a(\mathbf{x})\, f_a(\mathbf{x}) \text{;  } \rightarrow \mathcal{H}(\mathbf{x}) \text{: the }h \text{ nearest experts by centroid dissimilarity}$
+:::
+
+## `liblex`
+
+<img src="fig/liblex-cac-tarragona/8.png" width="30%" alt="liblex">
+
+
+<p style="text-align:center;">Library of local experts</p>
+
+
+## Operationalisation {background-color="#000000"}
+
+::: {.incremental}
+
+- No per-query model refitting
+
+- Deployment without access to the full reference library, preserving privacy
+
+- Interpretable local models
+
+- Intrinsic per-sample uncertainty proxy
+
+- Anchor spectra or samples with missing $y$ values
+
+- Incrementally extensible
+
+- Competitive predictive accuracy
+
+- Robust under severe domain shift?
+
+::: 
+
+## Background
+
+@ramirez2026spectral
+
+<div class="pdf-embed">
+  <iframe
+    src="fig/liblex-paper.pdf#toolbar=0&navpanes=0"
+    width="100%"
+    height="900"
+    style="border: none;">
+  </iframe>
+</div>
+
+
+# An experiment in soils... {background-color="#000000"}
+
+## Experiment [1/2]...
+
+A __soil__ IR spectral library from the North America [@hengl2021ossl]  
+
+Open source
+
+<img src="fig/map-1-liblex.png" alt="liblex" style="display:block; margin:0 auto;">
+
+
+## Experiment [2/2]...
+
+A __soil__ IR  spectral dataset from our target domain [@summerauer2021central]
+
+__Target__ $y$: Total carbon
+
+<img src="fig/map-2-liblex.png" alt="liblex" style="display:block; margin:0 auto;">
+
+
+
+## Variable importance results [1/2]
+
+
+<img src="fig/sel-ratios-1.png" width="30%" alt="liblex" style="display:block; margin:0 auto;">
+
+
+
+## Variable importance results [2/2]
+
+
+
+<img src="fig/sel-ratios-2.png" width="30%" alt="liblex" style="display:block; margin:0 auto;">
+
+
+## Which anchors gave birth to our relevant experts?
+
+<img src="fig/map-3-liblex.png" width="30%" alt="liblex" style="display:block; margin:0 auto;">
+
+## Validation with independent samples...
+
+
+<img src="fig/val_plot.png" width="30%" alt="liblex" style="display:block; margin:0 auto;">
+
+
+# Other tests in in soils... {background-color="#000000"}
+
+## Two kaggle competitions
+
+<div style="display:flex; align-items:center; justify-content:center; gap:2em;">
+<div style="flex:0 0 55%;">
+<img src="fig/kaggle-screen.png" alt="kaggle" style="width:100%;">
+</div>
+<div style="flex:0 0 40%; font-size:0.7em; text-align:left;">
+<p><a href="https://www.kaggle.com/competitions/afsis-soil-properties/code">AfSIS soil properties</a></p>
+<p><a href="https://www.kaggle.com/competitions/pedometrics2026/code">Pedometrics 2026</a></p>
+</div>
+</div>
+
+# In a food and feed applications... {background-color="#000000"}
+
+## Feed
+
+::: {.small-text}
+- Library built from data of 17 instruments/users: 4,747 local models
+- Applied to one independent instrument/user, not represented in the library
+:::
+
+<img src="fig/liblex-feed-val.png" alt="liblex feed validation" style="display:block; margin:0 auto; max-height:480px;">
+
+## Processed meat
+
+::: {.small-text}
+- Library built from data of 42 instruments/users: 23,958 local models
+- Applied to one independent instrument/user, not represented in the library
+:::
+
+<img src="fig/liblex-processed-meat-val.png" alt="liblex processed meat validation" style="display:block; margin:0 auto; max-height:480px;">
+
+
+## Cheese
+
+::: {.small-text}
+- Library built from data of 16 instruments/users: 6,518 local models
+- Applied to one independent instrument/user, not represented in the library
+:::
+
+<img src="fig/liblex-cheese-val.png" alt="liblex processed meat validation" style="display:block; margin:0 auto; max-height:480px;">
+
+# How do I play with liblex??? {background-color="#000000"}
+
+## Open-source implementation...{background-color="#000000"}
+
+[since 2013]
+
+
+<img src="fig/logo-resemble.png" width="30%" alt="liblex" style="display:block; margin:0 auto;">
+
+[https://cran.r-project.org/package=resemble](https://cran.r-project.org/package=resemble)
+```{r}
+#| eval: false
+liblex()
+```
+
+## Open-source implementation... {background-color="#000000"}
+
+[since 2013]
+
+<img src="fig/logo-resemble.png" width="30%" alt="liblex" style="display:block; margin:0 auto;">
+
+[https://cran.r-project.org/package=resemble](https://cran.r-project.org/package=resemble)
+
+and __matlab__ version of `liblex` prepared by __Erik Andries__
+
+## Future work {background-color="#000000"}
+
+::: {.incremental}
+
+- Learned gating (stacking / meta-learner) as an alternative to distance-based weights
+
+- Alternative dissimilarities (metric learning, embeddings) 
+
+- Incremental update policies and expert pruning  
+
+- Non-linear or hybrid expert architectures
+
+::: 
+
+## Our contributions {background-color="#000000"}
+
+::: {.incremental}
+
+- Reformulate MBL: retrieval and aggregation of pre-computed local experts, replacing per-query refitting  
+
+- Retrieval-gated ensembling via centroid dissimilarity, decoupling neighbourhood definition from model centring  
+
+- Intrinsic per-sample uncertainty proxy from expert dispersion
+
+- Deployment without full-library access, supporting privacy-preserving collaboration
+
+::: 
+
+# <span style="font-size: 1.8em; display: flex; justify-content: center;">Peace</span> {background-color="#000000"}
+
+This presentation: 
+
+```{r}
+#| echo: false
+#| eval: true
+#| fig-align: center
+#| fig-width: 3
+#| fig-height: 3
+library(qrcode)
+my_qr <- qr_code("https://l-ramirez-lopez.github.io/idrc-2026-presentation/")
+plot(my_qr)
+```
+
+
+## {background-color="#A0522D"}
+
+::: {.large-text}
+__📢 WORKSHOP ANNOUNCEMENT!__ 
+::: 
+
+___Applied NIR spectroscopy: from theory to calibration and instrumentation___
+
+Join us at North Carolina State University (NCSU), Raleigh, NC, from 9$^{th}$ to 11$^{th}$ November 2026!
+
+::: {.small-text2}
+___Organisers___: Miguel Castillo (NCSU), Juan José Acosta (Camcore), Marçal Plans (BÜCHI) and Leonardo Ramirez-Lopez (BÜCHI)
+::: 
+
+::: {.small-text3}
+This presentation: 
+::: 
+
+```{r}
+#| echo: false
+#| eval: true
+#| fig-align: left
+#| fig-width: 2
+#| fig-height: 2
+#| label: qr-code
+library(qrcode)
+my_qr <- qr_code("https://l-ramirez-lopez.github.io/nirpy-webminar-liblex/")
+plot(my_qr)
+```
+
+
+## References
+
+

@@ -1,0 +1,205 @@
+[
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#localised-modelling-why",
+    "href": "why-refit-when-you-can-retrieve.html#localised-modelling-why",
+    "title": "Why refit when you can retrieve?",
+    "section": "Localised modelling: why?",
+    "text": "Localised modelling: why?\n\nGlobal linear models assume a single spectrum–response relationship: heterogeneous libraries may violate this.\nLocal modelling (a.k.a memory-based learning) restricts fitting to spectrally similar samples, reducing the impact of domain shift (Næs et al., 1990; Shenk et al., 1997)\n\n\n\nI WANTED TO MAKE A PRESENTATION TO IMPRESS (AS THE OTHER PRESNTERS MAY HAVE ALSO WANTED)\nBUT THE IDEAS BEHIND THIS ARE SO SIMPLE THAT MAKING AN IMPRESSIVE SET OF SLIDES IS NOT EASY… THEREFORE I TRIED MY BEST TO FOCUS ON ELEGANCE (NO AESTETHIC [HOW SHOULD I PUT IT? HELP ME AS ELEGANCE MAY BE UNDERSTOOD AS AESTETHIC ELEGANCE]) AND CLARITY, AND I HOPE YOU WILL ENJOY IT.\nsoil is BOORING, too challenging\nSAMPLING for selecting the anchors!\nmodels that make sense\nfilter out models!\nlow uncertainty but may be due to the fact that all experts are worng\nambiguity in the experts"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#section",
+    "href": "why-refit-when-you-can-retrieve.html#section",
+    "title": "Why refit when you can retrieve?",
+    "section": "",
+    "text": "All models are wrong, but some are useful – (Box, 1976)"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#localised-modelling",
+    "href": "why-refit-when-you-can-retrieve.html#localised-modelling",
+    "title": "Why refit when you can retrieve?",
+    "section": "Localised modelling",
+    "text": "Localised modelling"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#localised-modelling-trade-offs",
+    "href": "why-refit-when-you-can-retrieve.html#localised-modelling-trade-offs",
+    "title": "Why refit when you can retrieve?",
+    "section": "Localised modelling: Trade-offs…",
+    "text": "Localised modelling: Trade-offs…\n\nPer-query refitting → computational cost at prediction time\nFull-library access required at prediction → data-sharing constraints\nNo general-purpose interpretation across query-specific models\nSensitivity to neighbour selection and spectral inconsistencies"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#section-1",
+    "href": "why-refit-when-you-can-retrieve.html#section-1",
+    "title": "Why refit when you can retrieve?",
+    "section": "",
+    "text": "\\[\\mathcal{D}_r := \\{(\\mathbf{x}_r^j, y_r^j)\\}_{j=1}^n\\]"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#section-2",
+    "href": "why-refit-when-you-can-retrieve.html#section-2",
+    "title": "Why refit when you can retrieve?",
+    "section": "",
+    "text": "\\[\\mathcal{A} \\subseteq \\{1, \\dots, n\\}\\]"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#section-3",
+    "href": "why-refit-when-you-can-retrieve.html#section-3",
+    "title": "Why refit when you can retrieve?",
+    "section": "",
+    "text": "\\[\\mathcal{N}_k(a) = \\{a\\} \\cup \\mathrm{NN}_{k-1}(a), \\quad |\\mathcal{N}_k(a)| = k\\]"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#section-4",
+    "href": "why-refit-when-you-can-retrieve.html#section-4",
+    "title": "Why refit when you can retrieve?",
+    "section": "",
+    "text": "\\[f_a: \\mathbb{R}^d \\to \\mathbb{R}, \\quad \\mathbf{c}_a = \\frac{1}{k}\\sum_{j \\in \\mathcal{N}_k(a)} \\mathbf{x}_r^j\\]"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#section-5",
+    "href": "why-refit-when-you-can-retrieve.html#section-5",
+    "title": "Why refit when you can retrieve?",
+    "section": "",
+    "text": "\\[\\mathcal{L} := \\{(f_a, \\mathbf{c}_a)\\}_{a \\in \\mathcal{A}}\\]"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#section-7",
+    "href": "why-refit-when-you-can-retrieve.html#section-7",
+    "title": "Why refit when you can retrieve?",
+    "section": "",
+    "text": "\\(\\hat{y}(\\mathbf{x}) = \\sum_{a \\in \\mathcal{H}(\\mathbf{x})} w_a(\\mathbf{x})\\, f_a(\\mathbf{x}) \\text{;  } \\rightarrow \\mathcal{H}(\\mathbf{x}) \\text{: the }h \\text{ nearest experts by centroid dissimilarity}\\)"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#liblex",
+    "href": "why-refit-when-you-can-retrieve.html#liblex",
+    "title": "Why refit when you can retrieve?",
+    "section": "liblex",
+    "text": "liblex\n\n\nLibrary of local experts"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#operationalisation",
+    "href": "why-refit-when-you-can-retrieve.html#operationalisation",
+    "title": "Why refit when you can retrieve?",
+    "section": "Operationalisation",
+    "text": "Operationalisation\n\nNo per-query model refitting\nDeployment without access to the full reference library, preserving privacy\nInterpretable local models\nIntrinsic per-sample uncertainty proxy\nAnchor spectra or samples with missing \\(y\\) values\nIncrementally extensible\nCompetitive predictive accuracy\nRobust under severe domain shift?"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#background",
+    "href": "why-refit-when-you-can-retrieve.html#background",
+    "title": "Why refit when you can retrieve?",
+    "section": "Background",
+    "text": "Background\nRamirez-Lopez et al. (2026)"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#experiment-12",
+    "href": "why-refit-when-you-can-retrieve.html#experiment-12",
+    "title": "Why refit when you can retrieve?",
+    "section": "Experiment [1/2]…",
+    "text": "Experiment [1/2]…\nA soil IR spectral library from the North America (Hengl et al., 2021)\nOpen source"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#experiment-22",
+    "href": "why-refit-when-you-can-retrieve.html#experiment-22",
+    "title": "Why refit when you can retrieve?",
+    "section": "Experiment [2/2]…",
+    "text": "Experiment [2/2]…\nA soil IR spectral dataset from our target domain (Summerauer et al., 2021)\nTarget \\(y\\): Total carbon"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#variable-importance-results-12",
+    "href": "why-refit-when-you-can-retrieve.html#variable-importance-results-12",
+    "title": "Why refit when you can retrieve?",
+    "section": "Variable importance results [1/2]",
+    "text": "Variable importance results [1/2]"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#variable-importance-results-22",
+    "href": "why-refit-when-you-can-retrieve.html#variable-importance-results-22",
+    "title": "Why refit when you can retrieve?",
+    "section": "Variable importance results [2/2]",
+    "text": "Variable importance results [2/2]"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#which-anchors-gave-birth-to-our-relevant-experts",
+    "href": "why-refit-when-you-can-retrieve.html#which-anchors-gave-birth-to-our-relevant-experts",
+    "title": "Why refit when you can retrieve?",
+    "section": "Which anchors gave birth to our relevant experts?",
+    "text": "Which anchors gave birth to our relevant experts?"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#validation-with-independent-samples",
+    "href": "why-refit-when-you-can-retrieve.html#validation-with-independent-samples",
+    "title": "Why refit when you can retrieve?",
+    "section": "Validation with independent samples…",
+    "text": "Validation with independent samples…"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#two-kaggle-competitions",
+    "href": "why-refit-when-you-can-retrieve.html#two-kaggle-competitions",
+    "title": "Why refit when you can retrieve?",
+    "section": "Two kaggle competitions",
+    "text": "Two kaggle competitions\n\n\n\n\n\n\nAfSIS soil properties\n\n\nPedometrics 2026"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#feed",
+    "href": "why-refit-when-you-can-retrieve.html#feed",
+    "title": "Why refit when you can retrieve?",
+    "section": "Feed",
+    "text": "Feed\n\n\nLibrary built from data of 17 instruments/users: 4,747 local models\nApplied to one independent instrument/user, not represented in the library"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#processed-meat",
+    "href": "why-refit-when-you-can-retrieve.html#processed-meat",
+    "title": "Why refit when you can retrieve?",
+    "section": "Processed meat",
+    "text": "Processed meat\n\n\nLibrary built from data of 42 instruments/users: 23,958 local models\nApplied to one independent instrument/user, not represented in the library"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#cheese",
+    "href": "why-refit-when-you-can-retrieve.html#cheese",
+    "title": "Why refit when you can retrieve?",
+    "section": "Cheese",
+    "text": "Cheese\n\n\nLibrary built from data of 16 instruments/users: 6,518 local models\nApplied to one independent instrument/user, not represented in the library"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#open-source-implementation",
+    "href": "why-refit-when-you-can-retrieve.html#open-source-implementation",
+    "title": "Why refit when you can retrieve?",
+    "section": "Open-source implementation…",
+    "text": "Open-source implementation…\n[since 2013]\n\nhttps://cran.r-project.org/package=resemble\n\nliblex()"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#open-source-implementation-1",
+    "href": "why-refit-when-you-can-retrieve.html#open-source-implementation-1",
+    "title": "Why refit when you can retrieve?",
+    "section": "Open-source implementation…",
+    "text": "Open-source implementation…\n[since 2013]\n\nhttps://cran.r-project.org/package=resemble\nand matlab version of liblex prepared by Erik Andries"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#future-work",
+    "href": "why-refit-when-you-can-retrieve.html#future-work",
+    "title": "Why refit when you can retrieve?",
+    "section": "Future work",
+    "text": "Future work\n\nLearned gating (stacking / meta-learner) as an alternative to distance-based weights\nAlternative dissimilarities (metric learning, embeddings)\nIncremental update policies and expert pruning\nNon-linear or hybrid expert architectures"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#our-contributions",
+    "href": "why-refit-when-you-can-retrieve.html#our-contributions",
+    "title": "Why refit when you can retrieve?",
+    "section": "Our contributions",
+    "text": "Our contributions\n\nReformulate MBL: retrieval and aggregation of pre-computed local experts, replacing per-query refitting\nRetrieval-gated ensembling via centroid dissimilarity, decoupling neighbourhood definition from model centring\nIntrinsic per-sample uncertainty proxy from expert dispersion\nDeployment without full-library access, supporting privacy-preserving collaboration"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#section-8",
+    "href": "why-refit-when-you-can-retrieve.html#section-8",
+    "title": "Why refit when you can retrieve?",
+    "section": "",
+    "text": "📢 WORKSHOP ANNOUNCEMENT!\n\nApplied NIR spectroscopy: from theory to calibration and instrumentation\nJoin us at North Carolina State University (NCSU), Raleigh, NC, from 9\\(^{th}\\) to 11\\(^{th}\\) November 2026!\n\nOrganisers: Miguel Castillo (NCSU), Juan José Acosta (Camcore), Marçal Plans (BÜCHI) and Leonardo Ramirez-Lopez (BÜCHI)\n\n\nThis presentation:"
+  },
+  {
+    "objectID": "why-refit-when-you-can-retrieve.html#references",
+    "href": "why-refit-when-you-can-retrieve.html#references",
+    "title": "Why refit when you can retrieve?",
+    "section": "References",
+    "text": "References\n\n\n\n\nBox, G.E., 1976. Science and statistics. Journal of the American Statistical Association 71, 791–799.\n\n\nHengl, T., Sanderman, J., Parente, L., 2021. Open soil spectral library: Training data and calibration models. https://doi.org/10.5281/zenodo.5759694\n\n\nNæs, T., Isaksson, T., Kowalski, B.R., 1990. Locally weighted regression and scatter correction for near-infrared reflectance data. Analytical Chemistry 62, 664–673.\n\n\nRamirez-Lopez, L., Rossel, R.V., Orellano, C., Kooijman, L., Perez-Fernandez, E., Wadoux, A.M.-C., Plans, M., Breure, T., Summerauer, L., Safanelli, J.L., others, 2026. When spectral libraries are too complex to search: Evolutionary subset selection for domain-adaptive calibration. Analytica Chimica Acta 345651. https://doi.org/10.1016/j.aca.2026.345651\n\n\nShenk, J.S., Westerhaus, M.O., Berzaghi, P., 1997. Investigation of a local calibration procedure for near infrared instruments. Journal of Near Infrared Spectroscopy 5, 223–232.\n\n\nSummerauer, L., Baumann, P., Ramirez-Lopez, L., Barthel, M., Bauters, M., Bukombe, B., Reichenbach, M., Boeckx, P., Kearsley, E., Van Oost, K., others, 2021. The central african soil spectral library: A new soil infrared repository and a geographical prediction analysis. SOIL 7, 693–715."
+  }
+]
