@@ -6,4 +6,4 @@ This is just a repo for the presentation "Why refit when you can retrieve? Intro
 
 This presentation is for an invited Nirpy Webminar (November 03, 2026).
 
-Here is the presentation: [https://l-ramirez-lopez.github.io/idrc-2026-presentation](https://l-ramirez-lopez.github.io/idrc-2026-presentation/)
+Here is the presentation: [https://l-ramirez-lopez.github.io/nirpy-webminar-liblex/](https://l-ramirez-lopez.github.io/nirpy-webminar-liblex/)
